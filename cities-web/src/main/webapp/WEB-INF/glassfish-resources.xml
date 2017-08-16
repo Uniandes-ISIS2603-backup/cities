@@ -10,7 +10,7 @@
         <property name="User" value="APP"/>
         <property name="Password" value="APP"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
-        <property name="createDatabase" value="drop and create"/>
+        <property name="createDatabase" value="create"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/jdbc/cityDB" object-type="user" pool-name="city_pool"/>
 </resources>
