@@ -79,9 +79,25 @@ public class CityPersistence {
         }
     }
 
+    /**
+     *
+     * @param id  identificador de la ciudad
+     * @return
+     */
+    public CityEntity find(Long id) {
+        LOGGER.log(Level.INFO, "Consultando city con id={0}", id);
+       return em.find(CityEntity.class, id);
+    }
+
     public List<CityEntity> findAll() {
         LOGGER.info("Consultando todas las cities");
         TypedQuery query = em.createQuery("select u from CityEntity u", CityEntity.class);
         return query.getResultList();
     }
+
+    public CityEntity update(CityEntity entity) {
+       LOGGER.log(Level.INFO, "Actualizando ciudad con id={0}", entity.getId());
+        return em.merge(entity);
+    }
+   
 }

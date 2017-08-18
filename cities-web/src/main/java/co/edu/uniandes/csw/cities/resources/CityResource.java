@@ -35,8 +35,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "cities".
@@ -71,6 +74,23 @@ public class CityResource {
         return listEntity2DetailDTO(cityLogic.getCities());
     }
 
+    @GET
+    @Path("{id: \\d+}")
+    public CityDetailDTO getCity(@PathParam("id") Long id) {
+        return new CityDetailDTO(cityLogic.getCity(id));
+    }
+
+   @PUT
+    @Path("{id: \\d+}")
+    public CityDetailDTO updateCity(@PathParam("id") Long id, CityDetailDTO city) throws BusinessLogicException {
+        city.setId(id);
+        CityEntity entity = cityLogic.getCity(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /city/" + id + " no existe.", 404);
+        }
+        return new CityDetailDTO(cityLogic.updateCity(id, city.toEntity()));
+    }
+    
     private List<CityDetailDTO> listEntity2DetailDTO(List<CityEntity> entityList) {
         List<CityDetailDTO> list = new ArrayList<>();
         for (CityEntity entity : entityList) {

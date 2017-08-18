@@ -32,5 +32,20 @@ import javax.persistence.Entity;
  */
 @Entity
 public class CityEntity extends BaseEntity implements Serializable {
+    private String pais;
 
+    /**
+     * @return the pais
+     */
+    public String getpais() {
+        return pais;
+    }
+
+    /**
+     * @param pais the pais to set
+     */
+    public void setpais(String pais) {
+        this.pais = pais;
+    }
+    
 }

@@ -35,6 +35,7 @@ public class CityDTO {
 
     private Long id;
     private String name;
+    private String pais;
 
     /**
      * Constructor por defecto
@@ -50,6 +51,7 @@ public class CityDTO {
     public CityDTO(CityEntity city) {
         this.id = city.getId();
         this.name = city.getName();
+        this.pais = city.getpais();
     }
 
     /**
@@ -88,6 +90,21 @@ public class CityDTO {
         CityEntity entity = new CityEntity();
         entity.setId(this.id);
         entity.setName(this.name);
+        entity.setpais(this.pais);
         return entity;
+    }
+
+    /**
+     * @return the pais
+     */
+    public String getpais() {
+        return pais;
+    }
+
+    /**
+     * @param pais the pais to set
+     */
+    public void setpais(String pais) {
+        this.pais = pais;
     }
 }
