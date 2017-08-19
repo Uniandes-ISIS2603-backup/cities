@@ -66,7 +66,7 @@ public class CityPersistence {
     public CityEntity findByName(String name) {
         LOGGER.log(Level.INFO, "Consultando city por nombre ", name);
 
-        // Se crea un query para buscar cityes con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+        // Se crea un query para buscar cities con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From CityEntity e where e.name = :name", CityEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 
         query = query.setParameter("name", name);

@@ -80,7 +80,7 @@ public class CityResource {
         return new CityDetailDTO(cityLogic.getCity(id));
     }
 
-   @PUT
+    @PUT
     @Path("{id: \\d+}")
     public CityDetailDTO updateCity(@PathParam("id") Long id, CityDetailDTO city) throws BusinessLogicException {
         city.setId(id);
