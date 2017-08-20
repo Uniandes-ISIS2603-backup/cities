@@ -78,7 +78,11 @@ public class CityResource {
     @GET
     @Path("{id: \\d+}")
     public CityDetailDTO getCity(@PathParam("id") Long id) {
-        return new CityDetailDTO(cityLogic.getCity(id));
+        CityEntity entity = cityLogic.getCity(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso city: " + id + " no existe.", 404);
+        }
+        return new CityDetailDTO(entity);
     }
 
     @PUT
@@ -87,7 +91,7 @@ public class CityResource {
         city.setId(id);
         CityEntity entity = cityLogic.getCity(id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /city/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso city: " + id + " no existe.", 404);
         }
         return new CityDetailDTO(cityLogic.updateCity(id, city.toEntity()));
     }
@@ -97,7 +101,7 @@ public class CityResource {
     public void deleteCity(@PathParam("id") Long id) {
         CityEntity entity = cityLogic.getCity(id);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /city/" + id + " no existe.", 404);
+            throw new WebApplicationException("El recurso city: " + id + " no existe.", 404);
         }
         cityLogic.deleteCity(entity);
     }
