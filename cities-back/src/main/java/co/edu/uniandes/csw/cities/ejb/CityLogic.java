@@ -70,10 +70,19 @@ public class CityLogic {
     }
 
     public CityEntity updateCity(Long id, CityEntity entity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar libro con id={0}", id);
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar city con id={0}", id);
         
         CityEntity newEntity = persistence.update(entity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar libro con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar city con id={0}", entity.getId());
         return newEntity;
     }
-}
+
+    public void deleteCity(CityEntity entity) {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar city con id={0}", entity.getId());
+        persistence.delete(entity);
+         LOGGER.log(Level.INFO, "Termina proceso de borrar city con id={0}", entity.getId());
+        
+    }
+}   
+
+    

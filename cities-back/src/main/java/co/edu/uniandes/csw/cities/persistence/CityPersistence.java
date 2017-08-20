@@ -99,5 +99,10 @@ public class CityPersistence {
        LOGGER.log(Level.INFO, "Actualizando ciudad con id={0}", entity.getId());
         return em.merge(entity);
     }
+
+    public void delete(CityEntity entity) {
+         LOGGER.log(Level.INFO, "Borrando ciudad con id={0}", entity.getId());
+        em.remove(entity);
+    }
    
 }
