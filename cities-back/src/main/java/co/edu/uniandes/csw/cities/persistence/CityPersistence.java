@@ -104,5 +104,22 @@ public class CityPersistence {
          LOGGER.log(Level.INFO, "Borrando ciudad con id={0}", entity.getId());
         em.remove(entity);
     }
+
+    public boolean existCityWithSameNameandDifferentId(Long id, String name) {
+        LOGGER.log(Level.INFO, "Consultando city por nombre y id", name);
+
+        // Se crea un query para buscar cities con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
+        TypedQuery query = em.createQuery("Select e From CityEntity e where e.name = :name and e.id <> :id" , CityEntity.class);
+        // Se remplaza el placeholder ":name" con el valor del argumento 
+        query = query.setParameter("name", name);
+        query = query.setParameter("id", id);
+        // Se invoca el query se obtiene la lista resultado
+        List<CityEntity> sameName = query.getResultList();
+        if (sameName.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
    
 }

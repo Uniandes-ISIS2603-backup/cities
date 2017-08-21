@@ -71,7 +71,9 @@ public class CityLogic {
 
     public CityEntity updateCity(Long id, CityEntity entity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar city con id={0}", id);
-        
+        if (persistence.existCityWithSameNameandDifferentId(id, entity.getName())) {
+            throw new BusinessLogicException("Ya existe una ciudad con ese nombre "+entity.getName());
+        }
         CityEntity newEntity = persistence.update(entity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar city con id={0}", entity.getId());
         return newEntity;
