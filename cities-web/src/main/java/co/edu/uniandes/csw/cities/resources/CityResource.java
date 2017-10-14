@@ -16,7 +16,7 @@ copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+CITYS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
@@ -35,8 +35,11 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * Clase que implementa el recurso REST correspondiente a "cities".
@@ -45,7 +48,7 @@ import javax.ws.rs.Produces;
  * este recurso tiene la ruta "cities". Al ejecutar la aplicación, el recurso
  * será accesibe a través de la ruta "/api/cities"
  *
- * @author ISIS2603
+ * @city ISIS2603
  *
  */
 @Path("cities")
@@ -71,6 +74,28 @@ public class CityResource {
         return listEntity2DetailDTO(cityLogic.getCities());
     }
 
+    @GET
+    @Path("{id: \\d+}")
+    public CityDetailDTO getCity(@PathParam("id") Long id) {
+        CityEntity entity = cityLogic.getCity(id);
+        if (entity == null) {
+            throw new WebApplicationException("La ciudad no existe", 404);
+        }
+        return new CityDetailDTO(entity);
+    }
+    
+    @PUT
+    @Path("{id: \\d+}")
+    public CityDetailDTO updateCity(@PathParam("id") Long id, CityDetailDTO city) throws BusinessLogicException {
+        city.setId(id);
+        CityEntity entity = cityLogic.getCity(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /citys/" + id + " no existe.", 404);
+        }
+        return new CityDetailDTO(cityLogic.updateCity(city.toEntity()));
+    }
+    
+    
     private List<CityDetailDTO> listEntity2DetailDTO(List<CityEntity> entityList) {
         List<CityDetailDTO> list = new ArrayList<>();
         for (CityEntity entity : entityList) {

@@ -20,9 +20,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-*/
+ */
 package co.edu.uniandes.csw.cities.ejb;
-
 
 import co.edu.uniandes.csw.cities.entities.CityEntity;
 import co.edu.uniandes.csw.cities.exceptions.BusinessLogicException;
@@ -44,19 +43,19 @@ public class CityLogic {
     @Inject
     private CityPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
 
-  
     public CityEntity createCity(CityEntity entity) throws BusinessLogicException {
         LOGGER.info("Inicia proceso de creación de city");
         // Verifica la regla de negocio que dice que no puede haber dos cityes con el mismo nombre
-        if (persistence.findByName(entity.getName())!= null)
-            throw new BusinessLogicException("Ya existe una City con el nombre \"" + entity.getName()+"\"");
+        if (persistence.findByName(entity.getName()) != null) {
+            throw new BusinessLogicException("Ya existe una Ciudad con el nombre \"" + entity.getName() + "\"");
+        }
         // Invoca la persistencia para crear la city
         persistence.create(entity);
         LOGGER.info("Termina proceso de creación de city");
         return entity;
     }
-    
-        public List<CityEntity> getCities() {
+
+    public List<CityEntity> getCities() {
         LOGGER.info("Inicia proceso de consultar todas las cities");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
         List<CityEntity> editorials = persistence.findAll();
@@ -64,4 +63,15 @@ public class CityLogic {
         return editorials;
     }
 
+    public CityEntity getCity(Long id) {
+        return persistence.find(id);
+    }
+
+    public CityEntity updateCity(CityEntity entity) throws BusinessLogicException  {
+        if (persistence.findByName(entity.getName()) != null) {
+            throw new BusinessLogicException("Ya existe una Ciudad con el nombre \"" + entity.getName() + "\"");
+        }
+        return persistence.update(entity);
+    }
+    
 }

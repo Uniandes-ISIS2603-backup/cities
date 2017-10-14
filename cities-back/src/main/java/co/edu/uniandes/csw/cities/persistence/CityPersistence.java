@@ -84,4 +84,12 @@ public class CityPersistence {
         TypedQuery query = em.createQuery("select u from CityEntity u", CityEntity.class);
         return query.getResultList();
     }
+
+    public CityEntity find(Long id) {
+        return em.find(CityEntity.class, id);
+    }
+
+    public CityEntity update(CityEntity entity) {
+         return em.merge(entity);
+    }
 }
