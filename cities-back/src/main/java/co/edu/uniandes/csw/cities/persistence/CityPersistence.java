@@ -92,4 +92,8 @@ public class CityPersistence {
     public CityEntity update(CityEntity entity) {
          return em.merge(entity);
     }
+    
+    public void delete(CityEntity entity) {
+        em.remove(entity);
+    }
 }

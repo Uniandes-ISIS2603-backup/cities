@@ -33,6 +33,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -95,6 +96,16 @@ public class CityResource {
         return new CityDetailDTO(cityLogic.updateCity(city.toEntity()));
     }
     
+    @DELETE
+    @Path("{id: \\d+}")
+     public void deleteCity(@PathParam("id") Long id) throws BusinessLogicException {
+        
+        CityEntity entity = cityLogic.getCity(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /citys/" + id + " no existe.", 404);
+        }
+        cityLogic.deleteCity(entity);
+    }
     
     private List<CityDetailDTO> listEntity2DetailDTO(List<CityEntity> entityList) {
         List<CityDetailDTO> list = new ArrayList<>();

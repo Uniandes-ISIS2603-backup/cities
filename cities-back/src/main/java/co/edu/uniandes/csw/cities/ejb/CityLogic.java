@@ -27,6 +27,7 @@ import co.edu.uniandes.csw.cities.entities.CityEntity;
 import co.edu.uniandes.csw.cities.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.cities.persistence.CityPersistence;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -74,4 +75,9 @@ public class CityLogic {
         return persistence.update(entity);
     }
     
+    public void deleteCity(CityEntity entity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar ciudad con id={0}", entity.getId());    
+        persistence.delete(entity);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar libro con id={0}", entity.getId());
+    }
 }
