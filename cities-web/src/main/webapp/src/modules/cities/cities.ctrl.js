@@ -64,17 +64,11 @@
                 }
                 ;
             };
-            
-            this.deleteRecord = function(record) {
-                 return $http.delete(context + "/" + 1)
-                            .then(function () {
-                                // $http.delete es una promesa
-                                // cuando termine bien, cambie de estado
-                                var index = $scope.records.indexOf(record);
-                                if (index > -1) {
-                                    $scope.records.splice(index, 1);
-                                }
-                            });
+
+            this.deleteRecord = function (id) {
+                $http.delete(context + "/" + id);
+                $state.reload('citiesList');
+
             }
 
 // Código continua con las funciones de despliegue de errores
