@@ -69,7 +69,7 @@
                 $http.delete(context + "/" + id);
                 $state.reload('citiesList');
 
-            }
+            };
 
 // Código continua con las funciones de despliegue de errores
 
