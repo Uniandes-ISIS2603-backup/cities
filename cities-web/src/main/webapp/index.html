@@ -23,14 +23,18 @@
     <body style="padding-top: 20px;">
         <div class="container-fluid col-md-12">
             <h3>Ejemplo Cities</h3>
-       
-                    <ul>
-                        <li><a ui-sref="cityCreate">Create</a></li>
-                        <li><a ui-sref="citiesList">List</a></li>
+          
+             <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <!-- Enlace al estado de listar ciudades -->
+                        <li><a ui-sref="citiesList">Cities</a></li>
+                    
+                        
                     </ul>
-            <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
-            <div ui-view="mainView">
+                </div>
             </div>
+            <div ui-view="mainView"></div> 
         </div>
     </body>
 </html>

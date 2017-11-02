@@ -1,25 +1,44 @@
-<div class="col-md-6 well">
+ <alert class="alert alert-danger" ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert()">{{alert.msg}} </alert>
+ <div class="container-fluid">
+    <div class="panel-group">
+        <div class="panel panel-primary">
+         
+               
+            <div class="panel-body">
+                <form ng-submit="ctrl.saveRecord(currentRecord.id)" name="city">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="cityName" class="col-sm-2">Name:</label>
+                            <input id="cityName" required ng-model="currentRecord.name" class="col-sm-6"/>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <div class="form-group col-md-6">
+                            <label for="cityZipcode" class="col-sm-2">Zipcode</label>
+                            <textarea id="cityZipcode" required ng-model="currentRecord.zipcode" class="col-sm-6"></textarea>
+                        </div>
+                    </div>                               
 
-    <form novalidate name="form" id="city-form" role="form" ng-submit="form.$valid && ctrl.saveRecord(currentRecord.id)">
+                    <div class="form-group row">
+                        <div class="form-group col-sm-4" ng-if="!city.$valid">
 
-        <div ng-messages="form.$error">
-            <div ng-message="required">Fill the required fields!</div>
-        </div>
+                            <div class="alert alert-warning" >
+                                <strong>Warning!</strong><p>All inputs are required*</p>
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div class="form-group row">
+                        <div class="form-group col-sm-12">
+                            <input ng-show="city.$valid" type="submit" value="Save" class="btn btn-success"/>
+                            <a class="btn btn-info" ui-sref="citiesList">Cancel</a>
+                        </div>
+                    </div>
+                </form>
 
-        <fieldset>
-            <input id="id" class="form-control" type="hidden" ng-model="currentRecord.id" />
-            <div class="form-group col-md-12" ng-class="{'has-success': form.name.$valid && form.name.$dirty, 'has-error': form.name.$invalid && (form.name.$dirty || form.$submitted)}">
-                <label for="name" class="col-md-2 control-label">Name</label>
-                <div class="col-md-10">
-                    <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" ng-init="currentRecord.name" required />
-                </div>
-                <label for="zipcode" class="col-md-2 control-label">Zipcode</label>
-                <div class="col-md-10">
-                    <input id="zipcode" name="zipcode" class="form-control" type="text" ng-model="currentRecord.zipcode" ng-init="currentRecord.zipcode" required />
-                </div>
             </div>
-            <button type="button" ui-sref='citiesList'>Cancel</button>
-            <button type="submit">Save</button>
-        </fieldset>
-    </form>
+        </div>
+    </div>
 </div>
+
+
