@@ -26,8 +26,9 @@ package co.edu.uniandes.csw.cities.dtos;
 import co.edu.uniandes.csw.cities.entities.CityEntity;
 
 /**
- * CityDTO Objeto de transferencia de datos de Cityes. Los DTO
- * contienen las represnetaciones de los JSON que se transfieren entre el cliente y el servidor.
+ * CityDTO Objeto de transferencia de datos de Cityes. Los DTO contienen las
+ * represnetaciones de los JSON que se transfieren entre el cliente y el
+ * servidor.
  *
  * @author ISIS2603
  */
@@ -35,6 +36,7 @@ public class CityDTO {
 
     private Long id;
     private String name;
+    private String zipcode;
 
     /**
      * Constructor por defecto
@@ -43,13 +45,16 @@ public class CityDTO {
     }
 
     /**
-     * Conviertir Entity a DTO
-     * (Crea un nuevo DTO con los valores que recibe en  la entidad que viene de argumento.
-     * @param city: Es la entidad que se va a convertir a DTO 
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param city: Es la entidad que se va a convertir a DTO
      */
     public CityDTO(CityEntity city) {
         this.id = city.getId();
         this.name = city.getName();
+        this.zipcode = city.getZipcode();
+
     }
 
     /**
@@ -81,13 +86,29 @@ public class CityDTO {
     }
 
     /**
+     * @return the zipcode
+     */
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    /**
+     * @param zipcode the zipcode to set
+     */
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    /**
      * Convertir DTO a Entity
-     * @return Un Entity con los valores del DTO 
+     *
+     * @return Un Entity con los valores del DTO
      */
     public CityEntity toEntity() {
         CityEntity entity = new CityEntity();
         entity.setId(this.id);
         entity.setName(this.name);
+        entity.setZipcode(this.zipcode);
         return entity;
     }
 }

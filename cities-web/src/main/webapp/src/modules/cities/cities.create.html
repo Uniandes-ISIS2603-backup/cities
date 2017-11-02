@@ -13,6 +13,10 @@
                 <div class="col-md-10">
                     <input id="name" name="name" class="form-control" type="text" ng-model="currentRecord.name" ng-init="currentRecord.name" required />
                 </div>
+                <label for="zipcode" class="col-md-2 control-label">Zipcode</label>
+                <div class="col-md-10">
+                    <input id="zipcode" name="zipcode" class="form-control" type="text" ng-model="currentRecord.zipcode" ng-init="currentRecord.zipcode" required />
+                </div>
             </div>
             <button type="button" ui-sref='citiesList'>Cancel</button>
             <button type="submit">Save</button>

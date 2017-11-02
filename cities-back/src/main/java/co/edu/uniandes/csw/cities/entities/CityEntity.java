@@ -32,5 +32,19 @@ import javax.persistence.Entity;
  */
 @Entity
 public class CityEntity extends BaseEntity implements Serializable {
+  private String zipcode;
 
+    /**
+     * @return the zipcode
+     */
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    /**
+     * @param zipcode the zipcode to set
+     */
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
 }
